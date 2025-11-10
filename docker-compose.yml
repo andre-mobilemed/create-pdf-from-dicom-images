@@ -1,0 +1,55 @@
+services:
+  dicom-pdf-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: dicom-pdf-api
+    ports:
+      - "9000:9000"
+    environment:
+      # DICOMweb Configuration
+      - DICOM_WADO_URL=https://spximagem.mobilemed.com.br/client-api/patients
+      
+      # External Log API
+      - CREATE_LOG_URL=http://localhost:8000/exam/statusLaudo
+      
+      # Server Configuration
+      - API_HOST=0.0.0.0
+      - API_PORT=9000
+      
+      # Worker Configuration
+      - DEFAULT_MAX_WORKERS=${DEFAULT_MAX_WORKERS:-4}
+      - MAX_ALLOWED_WORKERS=${MAX_ALLOWED_WORKERS:-8}
+      
+      # Logging
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      
+      # Security
+      - ALLOWED_CLIENT_IPS=172.17.0.1,127.0.0.1,localhost
+    
+    env_file:
+      - .env
+    
+    restart: unless-stopped
+    
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 4G
+        reservations:
+          cpus: '1'
+          memory: 2G
+    
+    networks:
+      - dicom-network
+    
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  dicom-network:
+    driver: bridge

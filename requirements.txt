@@ -1,0 +1,14 @@
+# Core dependencies for DICOM to PDF conversion
+fastapi>=0.110,<1
+uvicorn[standard]>=0.30,<1
+pydicom>=2.4,<3
+setuptools>=60.0.0
+pylibjpeg[libjpeg,openjpeg]>=1.4,<2
+pylibjpeg-libjpeg>=2.0,<3
+pylibjpeg-openjpeg>=2.0,<3
+numpy>=1.26,<3
+pillow>=10,<12
+reportlab>=4,<5
+requests>=2.25.0
+python-dotenv>=1.0.0
+httpx>=0.25.0

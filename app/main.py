@@ -373,7 +373,7 @@ async def process_dicom_async(render_request: RenderRequest, callback_url: str):
         if process_key in processed_requests:
             processed_requests.remove(process_key)
 
-@app.get("/health")
+@app.get("/pdf-generator/health")
 async def health_check(request: Request) -> Dict[str, Union[str, int]]:
     """Health check endpoint"""
     # Validate client IP
@@ -392,7 +392,7 @@ async def health_check(request: Request) -> Dict[str, Union[str, int]]:
         "allowed_ips_count": len(allowed_ips)
     }
 
-@app.post("/render")
+@app.post("/pdf-generator/render")
 async def render_dicom_to_pdf_async(
     background_tasks: BackgroundTasks,
     render_request: RenderRequest,
@@ -449,7 +449,7 @@ async def render_dicom_to_pdf_async(
             processed_requests.remove(process_key)
         raise
 
-@app.post("/render/sync")
+@app.post("/pdf-generator/render/sync")
 async def render_dicom_to_pdf_sync(render_request: RenderRequestSync, request: Request):
     """
     Convert DICOM files to PDF via DICOMweb WADO (Synchronous - Legacy).

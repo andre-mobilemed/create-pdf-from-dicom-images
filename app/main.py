@@ -232,9 +232,7 @@ async def send_callback(callback_url: str, payload: CallbackPayloadSantana):
     """Send callback without retry logic."""
     try:
         # Add error information to payload if provided
-        payload_dict = { "examID": payload.examID,
-                         "studyIUID": payload.studyIUID,
-                         "ImagensPDF": payload.ImagensPDF,
+        payload_dict = { "PDF": payload.ImagensPDF,
                          "CodAutorizacao": payload.CodAutorizacao,
                          "CodFaturamento": payload.CodFaturamento + "-i",
                          "CodProcedimento": payload.CodProcedimento

@@ -242,7 +242,11 @@ async def send_callback(callback_url: str, payload: CallbackPayloadSantana):
             response = await client.post(
                 callback_url,
                 json=payload_dict,
-                headers={"Content-Type": "application/json", "Authorization": payload.Authorization}
+                headers={
+                 "Content-Type": "application/json",
+                 "Authorization": payload.Authorization,
+                 "user-agent": "integracao.mobilemed"
+                }
             )
             
             if response.status_code == 200:

@@ -234,7 +234,7 @@ async def send_callback(callback_url: str, payload: CallbackPayloadSantana):
         # Add error information to payload if provided
         payload_dict = { "PDF": payload.ImagensPDF,
                          "CodAutorizacao": payload.CodAutorizacao,
-                         "CodFaturamento": payload.CodFaturamento + "-i",
+                         "CodFaturamento": payload.CodFaturamento,
                          "CodProcedimento": payload.CodProcedimento
                         }
             
